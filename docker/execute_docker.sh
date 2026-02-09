@@ -43,6 +43,8 @@ BOARD1_IP=$($DOCKER inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}
 #execute these in the docker containers
 $DOCKER exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fe "--batch-size 1000" --with-verbose-printing True --protocols hemi,semi,soho,temi,mascot
 $DOCKER exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fc "-R 154" -Fe "--batch-size 1000" --with-verbose-printing True --protocols semi2k,spdz2k
+echo "Copying data to ${OUTPUT_DIRECTORY}..."
+$DOCKER cp board1:/home/ubuntu/utils/$OUTPUT_DIRECTORY ./ > /dev/null
 
 echo ""
 echo "Executing APF with NO noise, and WITH direct"
@@ -55,6 +57,8 @@ PROGRAM=apf
 #execute these in the docker containers
 $DOCKER exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fe "--batch-size 1000 --direct" --with-verbose-printing True --protocols hemi,semi,soho,temi,mascot
 $DOCKER exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fc "-R 154" -Fe "--batch-size 1000 --direct" --with-verbose-printing True --protocols semi2k,spdz2k
+echo "Copying data to ${OUTPUT_DIRECTORY}..."
+$DOCKER cp board1:/home/ubuntu/utils/$OUTPUT_DIRECTORY ./ > /dev/null
 
 echo ""
 echo "Executing APF with noise, and NO direct"
@@ -67,6 +71,8 @@ PROGRAM=apf_with_noise
 #execute these in the docker containers
 $DOCKER exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fe "--batch-size 1000" --with-verbose-printing True --protocols hemi,semi,soho,temi,mascot
 $DOCKER exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fc "-R 154" -Fe "--batch-size 1000" --with-verbose-printing True --protocols semi2k,spdz2k
+echo "Copying data to ${OUTPUT_DIRECTORY}..."
+$DOCKER cp board1:/home/ubuntu/utils/$OUTPUT_DIRECTORY ./ > /dev/null
 
 echo ""
 echo "Executing APF with noise, and WITH direct"
@@ -79,6 +85,8 @@ PROGRAM=apf_with_noise
 #execute these in the docker containers
 $DOCKER exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fe "--batch-size 1000 --direct" --with-verbose-printing True --protocols hemi,semi,soho,temi,mascot
 $DOCKER exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fc "-R 154" -Fe "--batch-size 1000 --direct" --with-verbose-printing True --protocols semi2k,spdz2k
+echo "Copying data to ${OUTPUT_DIRECTORY}..."
+$DOCKER cp board1:/home/ubuntu/utils/$OUTPUT_DIRECTORY ./ > /dev/null
 
 #### QP #####
 
@@ -92,6 +100,8 @@ PROGRAM=qp3
 
 $DOCKER exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fe "--batch-size 1000" --with-verbose-printing True --protocols atlas,replicated-field,shamir,malicious-rep-field,ps-rep-field,sy-rep-field,sy-shamir,malicious-shamir,hemi,semi,soho,temi,mascot
 $DOCKER exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fc "-R 154" -Fe "--batch-size 1000" --with-verbose-printing True --protocols replicated-ring,brain,malicious-rep-ring,ps-rep-ring,sy-rep-ring,spdz2k
+echo "Copying data to ${OUTPUT_DIRECTORY}..."
+$DOCKER cp board1:/home/ubuntu/utils/$OUTPUT_DIRECTORY ./ > /dev/null
 
 echo ""
 echo "Executing QP with WITH direct"
