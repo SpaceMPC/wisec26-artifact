@@ -13,7 +13,7 @@ FLAGS=""
 BOARD1_IP=$(sudo docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' board1)
 
 #execute these in the docker containers
-sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fc "-R 154" -Fe "--batch-size 1000" --with-verbose-printing True
+sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fc "-R 192" -Fe "--batch-size 1000" --with-verbose-printing True
 
 echo "Copying data to ${OUTPUT_DIRECTORY}..."
 sudo docker cp board1:/home/ubuntu/utils/$OUTPUT_DIRECTORY ./ > /dev/null
