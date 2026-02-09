@@ -1,7 +1,7 @@
 Readme for reproducibility submission of paper ID [paperID]
 
 A) Source code info
-Repository: https://gitfront.io/r/c1234/opZTeh23ij6F/wisec26-artifact.git
+Repository: https://gitfront.io/r/c1234/opZTeh23ij6F/wisec26-artifact/
 List of Programming Languages: Python/Bash
 Compiler Info: Python
 Packages/Libraries Needed: matplotlib, numpy, pandas, docker
