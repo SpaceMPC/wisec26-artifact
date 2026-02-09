@@ -111,7 +111,6 @@ for protocol in protocols:
                 #ignore the dash N flag and do not pass it, this will cause this protocol to error
                 output = subprocess.getstatusoutput(f'./run -e {protocol} -p {args.path} -M {pathToMP} -F "{args.Fc}" -W "{args.Fe}" -I {args.I} -U {args.U}')
             else:
-                print(f'./run -e {protocol} -N {args.N} -p {args.path} -M {pathToMP} -F "{args.Fc}" -W "{args.Fe}" -I {args.I} -U {args.U}')
                 output = subprocess.getstatusoutput(f'./run -e {protocol} -N {args.N} -p {args.path} -M {pathToMP} -F "{args.Fc}" -W "{args.Fe}" -I {args.I} -U {args.U}')
             try:
                 if args.with_verbose_printing==True:

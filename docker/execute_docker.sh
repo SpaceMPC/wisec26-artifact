@@ -3,9 +3,17 @@
 #Spin up Docker containers
 bash create.sh
 
-NUMBER_OF_PARTIES=2
 NUMBER_OF_EXECUTIONS=1
-OUTPUT_DIRECTORY=test/
+
+
+#### APF #####
+
+echo ""
+echo "Executing APF with NO noise, and NO direct"
+echo ""
+#APF no noise; no direct
+NUMBER_OF_PARTIES=2
+OUTPUT_DIRECTORY=data/no-direct/
 PROGRAM=apf
 
 #grab the IP address of the Host board
@@ -13,16 +21,76 @@ BOARD1_IP=$(sudo docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddre
 
 #execute these in the docker containers
 sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fe "--batch-size 1000" --with-verbose-printing True --protocols hemi,semi,soho,temi,mascot
-sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fc "-R 192" -Fe "--batch-size 1000" --with-verbose-printing True --protocols semi2k
-sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fc "-R 154" -Fe "--batch-size 1000" --with-verbose-printing True --protocols spdz2k
+sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fc "-R 154" -Fe "--batch-size 1000" --with-verbose-printing True --protocols semi2k,spdz2k
 
+echo ""
+echo "Executing APF with NO noise, and WITH direct"
+echo ""
+#APF no noise; with direct
+NUMBER_OF_PARTIES=2
+OUTPUT_DIRECTORY=data/with-direct/
+PROGRAM=apf
+
+#grab the IP address of the Host board
+BOARD1_IP=$(sudo docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' board1)
+
+#execute these in the docker containers
+sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fe "--batch-size 1000 --direct" --with-verbose-printing True --protocols hemi,semi,soho,temi,mascot
+sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fc "-R 154" -Fe "--batch-size 1000 --direct" --with-verbose-printing True --protocols semi2k,spdz2k
+
+echo ""
+echo "Executing APF with noise, and NO direct"
+echo ""
+#APF with noise; no direct
+NUMBER_OF_PARTIES=2
+OUTPUT_DIRECTORY=data/no-direct/
+PROGRAM=apf_with_noise
+
+#grab the IP address of the Host board
+BOARD1_IP=$(sudo docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' board1)
+
+#execute these in the docker containers
+sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fe "--batch-size 1000" --with-verbose-printing True --protocols hemi,semi,soho,temi,mascot
+sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fc "-R 154" -Fe "--batch-size 1000" --with-verbose-printing True --protocols semi2k,spdz2k
+
+echo ""
+echo "Executing APF with noise, and WITH direct"
+echo ""
+#APF with noise; with direct
+NUMBER_OF_PARTIES=2
+OUTPUT_DIRECTORY=data/with-direct/
+PROGRAM=apf_with_noise
+
+#grab the IP address of the Host board
+BOARD1_IP=$(sudo docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' board1)
+
+#execute these in the docker containers
+sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fe "--batch-size 1000 --direct" --with-verbose-printing True --protocols hemi,semi,soho,temi,mascot
+sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fc "-R 154" -Fe "--batch-size 1000 --direct" --with-verbose-printing True --protocols semi2k,spdz2k
+
+#### QP #####
+
+echo ""
+echo "Executing QP with NO direct"
+echo ""
+#QP no direct
 NUMBER_OF_PARTIES=3
-NUMBER_OF_EXECUTIONS=1
-OUTPUT_DIRECTORY=test/
+OUTPUT_DIRECTORY=data/no-direct/
 PROGRAM=qp3
 
 sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fe "--batch-size 1000" --with-verbose-printing True --protocols atlas,replicated-field,shamir,malicious-rep-field,ps-rep-field,sy-rep-field,sy-shamir,malicious-shamir,hemi,semi,soho,temi,mascot
-sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fc "-R 192" -Fe "--batch-size 1000" --with-verbose-printing True --protocols replicated-ring,brain,malicious-rep-ring,ps-rep-ring,sy-rep-ring,semi2k,spdz2k
+sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fc "-R 154" -Fe "--batch-size 1000" --with-verbose-printing True --protocols replicated-ring,brain,malicious-rep-ring,ps-rep-ring,sy-rep-ring,spdz2k
+
+echo ""
+echo "Executing QP with WITH direct"
+echo ""
+#QP with direct
+NUMBER_OF_PARTIES=3
+OUTPUT_DIRECTORY=data/with-direct/
+PROGRAM=qp3
+
+sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fe "--batch-size 1000 --direct" --with-verbose-printing True --protocols atlas,replicated-field,shamir,malicious-rep-field,ps-rep-field,sy-rep-field,sy-shamir,malicious-shamir,hemi,semi,soho,temi,mascot
+sudo docker exec --workdir=/home/ubuntu/utils/ board1 python3 execute.py -n $NUMBER_OF_EXECUTIONS -N $NUMBER_OF_PARTIES -o $OUTPUT_DIRECTORY -M /home/ubuntu/MP-SPDZ $PROGRAM -U ubuntu -I $BOARD1_IP -Fc "-R 154" -Fe "--batch-size 1000 --direct" --with-verbose-printing True --protocols replicated-ring,brain,malicious-rep-ring,ps-rep-ring,sy-rep-ring,spdz2k
 
 
 echo "Copying data to ${OUTPUT_DIRECTORY}..."
