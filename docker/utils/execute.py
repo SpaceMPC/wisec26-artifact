@@ -19,6 +19,7 @@ parser.add_argument('-Fe', default="", help='Flags to pass to the execution step
 parser.add_argument('--with-verbose-printing', type=bool, default=False)
 parser.add_argument('-I', required=True, help="Host IP address")
 parser.add_argument('-U', required=True, help="The user to run as")
+parser.add_argument('--protocols', type=lambda s: s.split(','), help='Comma‑separated list of items')
 args = parser.parse_args()
 
 ################# Check to ensure all passed paths are valid ###################################
@@ -71,11 +72,13 @@ def custom_strip(string) -> int:
 
 # Which protocols do you want to test
 
+protocols = args.protocols
+
 ## APF semi-honest
     # don't take the -R flag
 #protocols = ['hemi','semi','soho','temi']
     # take the -R flag
-protocols = ['semi2k']
+#protocols = ['semi2k']
 ## APF malicious
     # take the -R flag
 #protocols = ['spdz2k']

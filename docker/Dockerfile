@@ -58,7 +58,7 @@ RUN arch_opt=$(case "$TARGETARCH" in \
         arm64) echo '-march=armv8-a' ;; \
         *)     echo '' ;; \
       esac) \
-    && echo "ARCH = ${arch_opt}\nUSE_NTL=1\nMY_CFLAGS += -DINSECURE\nMY_CFLAGS += -DRING_SIZE=154" > CONFIG.mine
+    && echo "ARCH = ${arch_opt}\nUSE_NTL=1\nMY_CFLAGS += -DINSECURE\nMY_CFLAGS += -DRING_SIZE=154" > MP-SPDZ/CONFIG.mine
 
 
 RUN cd MP-SPDZ && \
