@@ -3,6 +3,7 @@ Readme for reproducibility submission of paper ID 45
 
 A) Source code info
 Repository: https://gitfront.io/r/c1234/opZTeh23ij6F/wisec26-artifact/
+Link to VM: https://www.dropbox.com/scl/fi/t4dakfrf5h09amqjxthxe/MP-SPDZ_WiSEC_artifacts.ova?rlkey=3wj35tobltvc0cu2k0jhxwgjy&st=1c4dn90l&dl=0
 List of Programming Languages: Python/Bash
 Compiler Info: Python
 Packages/Libraries Needed: matplotlib, numpy, pandas, docker
