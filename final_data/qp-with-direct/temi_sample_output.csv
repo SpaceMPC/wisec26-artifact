@@ -1,0 +1,53 @@
+(0, Default bit length for compilation: 64
+Default security parameter for compilation: 40
+Compiling file Programs/Source/qp3_v5.mpc
+WARNING: Order of memory instructions not preserved, errors possible
+WARNING: Probabilistic truncation leaks some information, see https://eprint.iacr.org/2024/1127 for discussion. Use 'sfix.round_nearest = True' to deactivate this for fixed-point operations.
+Writing to Programs/Bytecode/qp3_v5-TruncPr(1)_107_36-1.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(18)_107_36-3.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(6)_107_36-4.bc
+Writing to Programs/Bytecode/qp3_v5-FPDiv(9)_71_36-5.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(3)_107_36-7.bc
+Writing to Programs/Schedules/qp3_v5.sch
+Writing to Programs/Bytecode/qp3_v5-0.bc
+Hash: 43ba919c05cd935d1ba95f55b355eb0a7b6bd6fc3fed3e7a55762cf9ab5f405a
+Program requires at most:
+           9 integer inputs from player 0
+           9 integer inputs from player 1
+           9 integer inputs from player 2
+       28173 integer bits
+         193 integer opens
+        6405 integer triples
+         108 virtual machine rounds
+Using statistical security parameter 40
+Ciphertext length: 466 (8 limbs)
+M [[3072, 0, 0], [0, 3072, 0], [0, 0, 3072]]
+Minv [[0.000325521, 0, 0], [0, 0.000325521, 0], [0, 0, 0.000325521]]
+e [2, 2, 2]
+Compiler: ./compile.py -l -E temi qp3_v5
+	5555 triples of gfp left
+Significant amount of unused triples of gfp distorting the benchmark. This protocol has a large minimum batch size, which makes this unavoidable for small programs.
+	827 bits of gfp left
+Detailed costs:
+             3 integer dot products
+          6405 integer multiplications
+Spent 0.688733 seconds (0.62424 MB, 77 rounds) on the online phase and 51.3251 seconds (36.8455 MB, 103 rounds) on the preprocessing/offline phase.
+Communication details:
+Broadcasting 4.31517 MB in 139 rounds, taking 17.7667 seconds
+Receiving directly 28.8394 MB in 20 rounds, taking 21.0022 seconds
+Sending directly 28.8394 MB in 20 rounds, taking 7.67689 seconds
+Sending/receiving 3.2e-05 MB in 1 rounds, taking 0.00520699 seconds
+CPU time = 28.8846
+The following benchmarks are including preprocessing (offline phase).
+Time = 52.0155 seconds 
+Data sent = 37.4697 MB in ~180 rounds (party 0 only)
+Global data sent = 83.5707 MB (all parties)
+Actual cost of program:
+  Type int
+          6405        Triples
+         28173           Bits
+This program might benefit from some protocol options.
+Consider adding the following at the beginning of your code:
+	program.use_trunc_pr = True
+	program.use_edabit(True)
+Command line: ./temi-party.x --direct --batch-size 1000 -v -p 0 -N 3 -h 192.168.1.2 qp3_v5)

@@ -1,0 +1,137 @@
+
+import mpc_math
+from math import e
+from math import pi
+from math import atan
+
+sfix.set_precision(30,63)
+cfix.set_precision(30,63)
+
+global M_PI
+M_PI = pi
+s_pi=sfix(pi)
+
+# gains
+ka = 1.0
+k_acc = Array(3, cfix)
+k_acc[0] = 1
+k_acc[1] = 1
+k_acc[2] = 1
+
+#  diagonal shaping matrices
+# Qa matrix: covariance matrix of object satellite
+Qa = Array(3, sfix)     # 0.025, 0.025, 0.075
+for i in (0,1,2):
+    Qa[i] = sfix.get_input_from(0)
+
+# make N matrix - shape/size of object satellite
+N = Array(3, sfix)      # 0.0025, 0.0025, 0.0025
+for i in (0,1,2):
+    N[i] = sfix.get_input_from(1)
+
+# Constants
+#from Object satellite
+size = Array(3,sfix)
+for i in (0,1,2):
+    size[i] = sfix.get_input_from(1)
+
+sigma = size[0]        # 0.5 satellite width
+psi = size[1]          # 0.3, satellite height
+sig_psi = size[2]      # 2*psi/sig = 1.2
+log2_e = 1.44269504089
+
+#  input guidance param
+# make bmatinv diagonal matrix ||  3x3 diagonal matrix (1/mass, 1/mass, 1/moment of inertia)  
+bmatinv = Array(3, sfix)        # 100,100,1
+for i in (0,1,2):
+    bmatinv[i] = sfix.get_input_from(0)
+
+#from Chaser satellite
+c_vel = Array(3,sfix)           #5 km/s total (3.5, 3.5, 0 km/s)
+for i in (0,1,2):
+    c_vel[i] = sfix.get_input_from(0)
+
+constVio = sint(0)              #  default to zero; true if constraints are violated
+
+
+#  compute attractive potential gradient between chaser and target */
+def grad(rCt,rCo):
+    dPhi_a = Array(3, sfix)                        #  gradient due to attractive potential
+    dPhi_r = Array(3, sfix)                        #  gradient due to repulsive potential
+    x = sfix(0)
+
+    dPhi_a[:] = ka*(Qa[:]*rCt[:])
+    rCo[:] = rCo[:]*rCo[:]
+    x = rCo.dot(N)
+    s1 = sint(1)
+    constVio = x < s1
+
+    x = -x/sigma
+    x = (x < -25).if_else(-25,x)
+    dPhi_r[:] = sig_psi*mpc_math.exp2_fx(log2_e*x)*(rCo[:]*N[:])
+
+    return dPhi_a,dPhi_r, constVio
+
+def ret(attr,rep,vel):
+    #  Compute control input
+    u = Array(3, sfix)                                     #  control input force [N]
+    u[:] = -k_acc[:]*bmatinv[:]* (vel[:]+attr[:]+rep[:])
+    return u
+
+
+# Create position values */     
+# party 0
+c_pos = Array(3,cfix)
+c_pos[0] = 0
+c_pos[1] = 0
+c_pos[2] = 0
+
+t_pos = Array(3, cfix)
+t_pos[0] = 300          # 300
+t_pos[1] = 50           # 50
+t_pos[2] = 0.156148     # rad
+
+# party 1
+o_pos = Array(3, cfix)
+o_pos[0] = 500          # 200
+o_pos[1] = 500          # 20
+o_pos[2] = 0.099668     # 0.7854 rad
+
+
+# create distance arrays 
+rCt = Array(3, cfix)      #radius bw chaser and target
+rCo = Array(3, cfix)      #radius bw chaser and object
+
+rCt[:] = t_pos[:] - c_pos[:]      #chaser-target distance (x, y, theta)
+rCo[:] = o_pos[:] - c_pos[:]      #chaser-object distance (x, y, theta)
+
+## Get potential gradients 
+attr, rep, constVio = grad(rCt,rCo)
+
+## get return values 
+vals = ret(attr, rep, c_vel)
+
+r = Array(3, sfix)
+# generate random elements 3 times
+for i in range(3):
+    r[i] = sfix.get_random(0, 16777216)
+
+bits = Matrix(3, 63, sint)
+# bit-decompose the result
+for i in range(3):
+    bits[i] = vals[i].bit_decompose(63)
+
+# need prefix OR
+for i in range(3):
+    bits[i] = PreOR(bits[i])
+
+msnzb = Array(3, sint)
+# determine the most significant non-zero bit as the sum
+for i in range(3):
+    msnzb[i] = sint(0)
+    for j in range(63):
+        msnzb[i] += bits[i][j]
+    
+for i in range(3):
+    vals[i] = vals[i] + (sint(r[i]) >> (69 - msnzb[i]))
+

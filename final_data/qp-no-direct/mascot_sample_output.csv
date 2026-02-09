@@ -1,0 +1,58 @@
+(0, Default bit length for compilation: 64
+Default security parameter for compilation: 40
+Compiling file Programs/Source/qp3_v5.mpc
+WARNING: Order of memory instructions not preserved, errors possible
+WARNING: Probabilistic truncation leaks some information, see https://eprint.iacr.org/2024/1127 for discussion. Use 'sfix.round_nearest = True' to deactivate this for fixed-point operations.
+Writing to Programs/Bytecode/qp3_v5-TruncPr(1)_107_36-1.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(18)_107_36-3.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(6)_107_36-4.bc
+Writing to Programs/Bytecode/qp3_v5-FPDiv(9)_71_36-5.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(3)_107_36-7.bc
+Writing to Programs/Schedules/qp3_v5.sch
+Writing to Programs/Bytecode/qp3_v5-0.bc
+Hash: 43ba919c05cd935d1ba95f55b355eb0a7b6bd6fc3fed3e7a55762cf9ab5f405a
+Program requires at most:
+           9 integer inputs from player 0
+           9 integer inputs from player 1
+           9 integer inputs from player 2
+       28173 integer bits
+         193 integer opens
+        6405 integer triples
+         108 virtual machine rounds
+Using statistical security parameter 40
+No modulus found in Player-Data//3-p-192/Params-Data, generating 192-bit prime
+M [[3072, 0, 0], [0, 3072, 0], [0, 0, 3072]]
+Minv [[0.000325521, 0, 0], [0, 0.000325521, 0], [0, 0, 0.000325521]]
+e [2, 2, 2]
+Compiler: ./compile.py -l -E mascot qp3_v5
+	827 bits of SPDZ gfp left
+Detailed costs:
+             3 integer dot products
+             9 integer inputs
+          6405 integer multiplications
+         71003 integer openings
+Spent 2.09116 seconds (0.636464 MB, 468 rounds) on the online phase and 3670.02 seconds (3034.02 MB, 1507 rounds) on the preprocessing/offline phase.
+Communication details:
+Broadcasting 0.012184 MB in 393 rounds, taking 73.5932 seconds
+Exchanging one-to-one 2610.34 MB in 292 rounds, taking 4660.62 seconds
+Receiving directly 5.10816 MB in 346 rounds, taking 91.7137 seconds
+Receiving one-to-one 419.183 MB in 298 rounds, taking 156.984 seconds
+Sending directly 5.10773 MB in 344 rounds, taking 0.0752368 seconds
+Sending one-to-one 419.183 MB in 298 rounds, taking 140.491 seconds
+Sending to all 0.000216 MB in 1 rounds, taking 8.0835e-05 seconds
+Sending/receiving 9.6e-05 MB in 3 rounds, taking 0.00906973 seconds
+CPU time = 3961.64
+The following benchmarks are including preprocessing (offline phase).
+Time = 3672.13 seconds 
+Data sent = 3034.66 MB in ~1975 rounds (party 0 only)
+Global data sent = 9098.86 MB (all parties)
+Actual cost of program:
+  Type int
+          6405        Triples
+         28173           Bits
+            27   Input tuples (9 9 9)
+This program might benefit from some protocol options.
+Consider adding the following at the beginning of your code:
+	program.use_edabit(True)
+Coordination took 0.175987 seconds
+Command line: ./mascot-party.x --batch-size 1000 -v -p 0 -N 3 -h 192.168.1.2 qp3_v5)

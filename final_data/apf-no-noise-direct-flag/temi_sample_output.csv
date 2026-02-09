@@ -1,0 +1,53 @@
+(0, Default bit length for compilation: 64
+Default security parameter for compilation: 40
+Compiling file Programs/Source/apf_without_random_aug_22_2025.mpc
+WARNING: Probabilistic truncation leaks some information, see https://eprint.iacr.org/2024/1127 for discussion. Use 'sfix.round_nearest = True' to deactivate this for fixed-point operations.
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-TruncPr(14)_93_30-1.bc
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-LTZ(1)_64-3.bc
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-FPDiv(1)_63_30-5.bc
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-TruncPr(1)_93_30-7.bc
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-exp2_fx(1)_63_30-8.bc
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-TruncPr(3)_93_30-10.bc
+Writing to Programs/Schedules/apf_without_random_aug_22_2025.sch
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-0.bc
+Hash: 8a24714a11bf43290a07a330bfd73a04e0c30f3bc8bd1951eab6f34d892bd8a0
+Program requires at most:
+           9 integer inputs from player 0
+           6 integer inputs from player 1
+       13789 integer bits
+          90 integer opens
+        1132 integer triples
+        1132 integer simple multiplications
+          93 virtual machine rounds
+Truncation error probability 2^-40
+Using statistical security parameter 40
+Ciphertext length: 465 (8 limbs)
+Setup took 4.03865 seconds.
+Compiler: ./compile.py -l -E temi apf_without_random_aug_22_2025
+	7060 triples of gfp left
+Significant amount of unused triples of gfp distorting the benchmark. This protocol has a large minimum batch size, which makes this unavoidable for small programs.
+	419 bits of gfp left
+Detailed costs:
+          1132 integer multiplications
+Spent 0.349147 seconds (0.056528 MB, 84 rounds) on the online phase and 7.07432 seconds (3.74625 MB, 93 rounds) on the preprocessing/offline phase.
+Communication details:
+Broadcasting 0.576697 MB in 85 rounds, taking 1.4681 seconds
+Exchanging one-to-one 3.2e-05 MB in 2 rounds, taking 0.00356438 seconds
+Receiving directly 2.88394 MB in 2 rounds, taking 2.7562 seconds
+Receiving one-to-one 0.202495 MB in 35 rounds, taking 0 seconds
+Sending directly 2.88394 MB in 2 rounds, taking 1.60681 seconds
+Sending one-to-one 0.342114 MB in 51 rounds, taking 0.00106262 seconds
+CPU time = 3.96671
+The following benchmarks are including preprocessing (offline phase).
+Time = 7.42558 seconds 
+Data sent = 3.80278 MB in ~177 rounds (party 0 only)
+Global data sent = 7.46597 MB (all parties)
+Actual preprocessing cost of program:
+  Type int
+          1132        Triples
+         13789           Bits
+This program might benefit from some protocol options.
+Consider adding the following at the beginning of your code:
+	program.use_trunc_pr = True
+	program.use_edabit(True)
+Command line: ./temi-party.x --batch-size 1000 --direct -v -p 0 -N 2 -h 192.168.1.2 apf_without_random_aug_22_2025)

@@ -1,0 +1,46 @@
+(0, Default bit length for compilation: 64
+Default security parameter for compilation: 40
+Compiling file Programs/Source/qp3_v5.mpc
+WARNING: Order of memory instructions not preserved, errors possible
+WARNING: Probabilistic truncation leaks some information, see https://eprint.iacr.org/2024/1127 for discussion. Use 'sfix.round_nearest = True' to deactivate this for fixed-point operations.
+Writing to Programs/Bytecode/qp3_v5-TruncPr(1)_107_36-1.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(18)_107_36-3.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(6)_107_36-4.bc
+Writing to Programs/Bytecode/qp3_v5-FPDiv(9)_71_36-5.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(3)_107_36-7.bc
+Writing to Programs/Schedules/qp3_v5.sch
+Writing to Programs/Bytecode/qp3_v5-0.bc
+Hash: 43ba919c05cd935d1ba95f55b355eb0a7b6bd6fc3fed3e7a55762cf9ab5f405a
+Program requires at most:
+           9 integer inputs from player 0
+           9 integer inputs from player 1
+           9 integer inputs from player 2
+       28173 integer bits
+         193 integer opens
+        6405 integer triples
+         108 virtual machine rounds
+Using statistical security parameter 40
+No modulus found in Player-Data//3-SYMSp-192/Params-Data, generating 192-bit prime
+M [[3072, 0, 0], [0, 3072, 0], [0, 0, 3072]]
+Minv [[0.000325521, 0, 0], [0, 0.000325521, 0], [0, 0, 0.000325521]]
+e [2, 2, 2]
+Compiler: ./compile.py -l -E sy-shamir qp3_v5
+	827 bits of SPDZ-wise Shamir gfp left
+Detailed costs:
+          6396 integer multiplications
+Spent 1.12188 seconds (0.396736 MB, 195 rounds) on the online phase and 10.9751 seconds (7.31392 MB, 403 rounds) on the preprocessing/offline phase.
+Communication details:
+Partial broadcasting 1.39774 MB in 146 rounds, taking 2.72455 seconds
+Sending/receiving 4.95187 MB in 464 rounds, taking 5.5756 seconds
+CPU time = 4.48258
+The following benchmarks are including preprocessing (offline phase).
+Time = 12.203 seconds 
+Data sent = 7.74734 MB in ~610 rounds (party 0 only)
+Global data sent = 23.242 MB (all parties)
+Actual cost of program:
+  Type int
+         28173           Bits
+This program might benefit from some protocol options.
+Consider adding the following at the beginning of your code:
+	program.use_edabit(True)
+Command line: ./sy-shamir-party.x --direct --batch-size 1000 -v -p 0 -N 3 -h 192.168.1.2 qp3_v5)

@@ -1,0 +1,48 @@
+(0, Default bit length for compilation: 64
+Default security parameter for compilation: 40
+Compiling file Programs/Source/qp3_v5.mpc
+WARNING: Order of memory instructions not preserved, errors possible
+WARNING: Probabilistic truncation leaks some information, see https://eprint.iacr.org/2024/1127 for discussion. Use 'sfix.round_nearest = True' to deactivate this for fixed-point operations.
+Writing to Programs/Bytecode/qp3_v5-TruncPr(1)_107_36-1.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(18)_107_36-3.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(6)_107_36-4.bc
+Writing to Programs/Bytecode/qp3_v5-FPDiv(9)_71_36-5.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(3)_107_36-7.bc
+Writing to Programs/Schedules/qp3_v5.sch
+Writing to Programs/Bytecode/qp3_v5-0.bc
+Hash: 43ba919c05cd935d1ba95f55b355eb0a7b6bd6fc3fed3e7a55762cf9ab5f405a
+Program requires at most:
+           9 integer inputs from player 0
+           9 integer inputs from player 1
+           9 integer inputs from player 2
+       28173 integer bits
+         193 integer opens
+        6405 integer triples
+         108 virtual machine rounds
+Using statistical security parameter 40
+No modulus found in Player-Data//3-SYMp-192/Params-Data, generating 192-bit prime
+M [[3072, 0, 0], [0, 3072, 0], [0, 0, 3072]]
+Minv [[0.000325521, 0, 0], [0, 0.000325521, 0], [0, 0, 0.000325521]]
+e [2, 2, 2]
+Compiler: ./compile.py -l -E sy-rep-field qp3_v5
+	827 bits of SPDZ-wise malicious replicated gfp left
+Detailed costs:
+          6396 integer multiplications
+Spent 0.990342 seconds (0.31796 MB, 185 rounds) on the online phase and 6.21084 seconds (3.25554 MB, 464 rounds) on the preprocessing/offline phase.
+Communication details:
+Broadcasting 0.006212 MB in 205 rounds, taking 0.619612 seconds
+Passing around 3.34524 MB in 429 rounds, taking 4.22232 seconds
+Receiving directly 0.24 MB in 10 rounds, taking 0.274245 seconds
+Sending directly 0.216 MB in 9 rounds, taking 0.00349215 seconds
+CPU time = 2.47562
+The following benchmarks are including preprocessing (offline phase).
+Time = 7.21699 seconds 
+Data sent = 3.57366 MB in ~653 rounds (party 0 only)
+Global data sent = 10.745 MB (all parties)
+Actual cost of program:
+  Type int
+         28173           Bits
+This program might benefit from some protocol options.
+Consider adding the following at the beginning of your code:
+	program.use_edabit(True)
+Command line: ./sy-rep-field-party.x --direct --batch-size 1000 -v -p 0 -h 192.168.1.2 qp3_v5)

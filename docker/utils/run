@@ -1,0 +1,82 @@
+#!/bin/bash
+
+usage() { echo "Usage: $0 [-e protocol] [-p mpc program] [-N numberOfParties] [-M path to MP-SPDZ] [-F compile flags] [-W run-time flags]" 1>&2; exit 1; }
+
+while getopts ":e:p:N:M:F:W:I:U" o; do
+    case "${o}" in
+        e)
+            e=${OPTARG}
+            ;;
+        p)
+            p=${OPTARG}
+            ;;
+        N)
+            N=${OPTARG}
+            ;;
+        M)
+            M=${OPTARG}
+            ;;
+        F)
+            F=${OPTARG}
+            ;;
+        W)
+            W=${OPTARG}
+            ;;
+        I)
+           I=${OPTARG}
+            ;;
+        U)
+           U=${OPTARG}
+            ;;
+        *)
+            usage
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ -z "${N}" ]; then
+  #some of the scripts do not take a -N flag if this is blank, make the -N empty
+ dash_N=""
+ N=3
+else
+ dash_N="-N ${N}"
+fi
+
+if [ -z "${U}" ]; then
+  #place default IP here
+ USER="ubuntu"
+else
+ USER=$U
+fi
+
+if [ -z "${M}" ]; then
+  #if M is empty set the path to standard "~/git/MP-SPDZ/"
+  M="~/git/MP-SPDZ/"
+  M=$(eval echo $M)
+fi
+
+if [ -z "${e}" ] || [ -z "${p}" ]; then
+   usage
+fi
+
+USERNAME=$USER
+HOSTS="brother2 brother3"
+
+SCRIPT_COMPILE="cd ${M}; ./compile.py -l -E ${e} ${p} ${F}"
+i=1
+for HOSTNAME in ${HOSTS} ; do
+  #makes sure that only the appropriate number of hosts are engaged
+  if [[ $i -lt $N ]]; then
+    SCRIPT_EXECUTE="cd ${M}; ./${e}-party.x ${W} -p ${i} ${dash_N} -h ${I} ${p}"
+    scp ${M}Programs/Source/${p}.mpc ${HOSTNAME}:${M}Programs/Source/
+    echo "ssh -l ${USERNAME} ${HOSTNAME} '${SCRIPT_COMPILE} > /dev/null; ${SCRIPT_EXECUTE} > /dev/null 2>&1' &"
+    ssh -l ${USERNAME} ${HOSTNAME} "${SCRIPT_COMPILE} > /dev/null; ${SCRIPT_EXECUTE} > /dev/null 2>&1" &
+    ((i++))
+  fi
+done
+
+#start the local one
+i=0
+cd ${M}; ./compile.py -l -E ${e} ${p} ${F}
+cd ${M}; ./${e}-party.x ${W} -p ${i} ${dash_N} -h ${I} ${p}

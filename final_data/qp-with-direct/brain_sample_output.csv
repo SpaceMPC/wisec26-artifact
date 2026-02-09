@@ -1,0 +1,54 @@
+(0, Default bit length for compilation: 153
+Default security parameter for compilation: 40
+Compiling file Programs/Source/qp3_v5.mpc
+WARNING: Order of memory instructions not preserved, errors possible
+WARNING: Probabilistic truncation leaks some information, see https://eprint.iacr.org/2024/1127 for discussion. Use 'sfix.round_nearest = True' to deactivate this for fixed-point operations.
+Writing to Programs/Bytecode/qp3_v5-TruncPr(1)_107_36-1.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(18)_107_36-3.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(6)_107_36-4.bc
+Writing to Programs/Bytecode/qp3_v5-FPDiv(9)_71_36-5.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(3)_107_36-7.bc
+Writing to Programs/Schedules/qp3_v5.sch
+Writing to Programs/Bytecode/qp3_v5-0.bc
+Hash: 095f2276d6bdd6d34083ace95c78ad96fb2b986e9d37685e11f1978ee3f0d6d7
+Program requires at most:
+           9 integer inputs from player 0
+           9 integer inputs from player 1
+           9 integer inputs from player 2
+       21447 integer bits
+         193 integer opens
+        6414 integer triples
+         109 virtual machine rounds
+Using statistical security parameter 40
+Trying to run 154-bit computation
+M [[3072, 0, 0], [0, 3072, 0], [0, 0, 3072]]
+Minv [[0.000325521, 0, 0], [0, 0.000325521, 0], [0, 0, 0.000325521]]
+e [2, 2, 2]
+Compiler: ./compile.py -l -E brain qp3_v5 -R 154
+	21 triples of replicated Z2^154 left
+	553 bits of replicated Z2^154 left
+Detailed costs:
+             3 integer dot products
+         15009 integer inputs
+          6414 integer multiplications
+         22000 integer multiplications in preprocessing
+        101021 integer openings
+Spent 0.673221 seconds (0.26348 MB, 122 rounds) on the online phase and 18.6283 seconds (13.2526 MB, 902 rounds) on the preprocessing/offline phase.
+Communication details:
+Broadcasting 0.010108 MB in 276 rounds, taking 1.23129 seconds
+Passing around 13.3532 MB in 404 rounds, taking 12.3748 seconds
+Receiving directly 0.14264 MB in 172 rounds, taking 0.639041 seconds
+Sending directly 0.14264 MB in 172 rounds, taking 0.124481 seconds
+CPU time = 6.12197
+The following benchmarks are including preprocessing (offline phase).
+Time = 19.3092 seconds 
+Data sent = 13.5161 MB in ~1024 rounds (party 0 only)
+Global data sent = 40.5283 MB (all parties)
+Actual cost of program:
+  Type int
+          6414        Triples
+         21447           Bits
+This program might benefit from some protocol options.
+Consider adding the following at the beginning of your code:
+	program.use_edabit(True)
+Command line: ./brain-party.x --direct --batch-size 1000 -v -p 0 -h 192.168.1.2 qp3_v5)

@@ -1,0 +1,51 @@
+(0, Default bit length for compilation: 64
+Default security parameter for compilation: 40
+Compiling file Programs/Source/qp3_v5.mpc
+WARNING: Order of memory instructions not preserved, errors possible
+Writing to Programs/Bytecode/qp3_v5-TruncPr(1)_107_36-1.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(18)_107_36-3.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(6)_107_36-4.bc
+Writing to Programs/Bytecode/qp3_v5-FPDiv(9)_71_36-5.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(3)_107_36-7.bc
+Writing to Programs/Schedules/qp3_v5.sch
+Writing to Programs/Bytecode/qp3_v5-0.bc
+Hash: c536be5eee0127630f1cfb9b0c900408f15724e7f3ba9599f08846a9812bb42b
+Program requires at most:
+           9 integer inputs from player 0
+           9 integer inputs from player 1
+           9 integer inputs from player 2
+        6405 integer triples
+        2007 integer bits
+          39 integer opens
+         108 virtual machine rounds
+Using statistical security parameter 40
+No modulus found in Player-Data//3-Rp-192/Params-Data, generating 192-bit prime
+M [[3072, 0, 0], [0, 3072, 0], [0, 0, 3072]]
+Minv [[0.000325521, 0, 0], [0, 0.000325521, 0], [0, 0, 0.000325521]]
+e [-2.16346e+32, -2.16346e+32, -2.16346e+32]
+Compiler: ./compile.py -l -E replicated-field qp3_v5
+	105 dabits of replicated gfp left
+Detailed costs:
+             3 integer dot products
+          2121 integer inputs
+            33 integer multiplication rounds
+          6396 integer multiplications
+            39 integer openings
+            38 probabilistic truncation rounds
+Spent 0.452103 seconds (0.154728 MB, 38 rounds) on the online phase and 0.115905 seconds (0.050688 MB, 6 rounds) on the preprocessing/offline phase.
+Communication details:
+Passing around 0.154728 MB in 38 rounds, taking 0.326014 seconds
+Receiving directly 0.050688 MB in 3 rounds, taking 0.0734021 seconds
+Sending directly 0.050688 MB in 3 rounds, taking 0.00337298 seconds
+CPU time = 0.20172
+The following benchmarks are including preprocessing (offline phase).
+Time = 0.577941 seconds 
+Data sent = 0.205416 MB in ~44 rounds (party 0 only)
+Global data sent = 0.619944 MB (all parties)
+Actual cost of program:
+  Type int
+          2007           Bits
+This program might benefit from some protocol options.
+Consider adding the following at the beginning of your code:
+	program.use_edabit(True)
+Command line: ./replicated-field-party.x --batch-size 1000 -v -p 0 -h 192.168.1.2 qp3_v5)

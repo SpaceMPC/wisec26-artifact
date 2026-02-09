@@ -1,0 +1,53 @@
+(0, Default bit length for compilation: 153
+Default security parameter for compilation: 40
+Compiling file Programs/Source/qp3_v5.mpc
+WARNING: Order of memory instructions not preserved, errors possible
+WARNING: Probabilistic truncation leaks some information, see https://eprint.iacr.org/2024/1127 for discussion. Use 'sfix.round_nearest = True' to deactivate this for fixed-point operations.
+Writing to Programs/Bytecode/qp3_v5-TruncPr(1)_107_36-1.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(18)_107_36-3.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(6)_107_36-4.bc
+Writing to Programs/Bytecode/qp3_v5-FPDiv(9)_71_36-5.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(3)_107_36-7.bc
+Writing to Programs/Schedules/qp3_v5.sch
+Writing to Programs/Bytecode/qp3_v5-0.bc
+Hash: 095f2276d6bdd6d34083ace95c78ad96fb2b986e9d37685e11f1978ee3f0d6d7
+Program requires at most:
+           9 integer inputs from player 0
+           9 integer inputs from player 1
+           9 integer inputs from player 2
+       21447 integer bits
+         193 integer opens
+        6414 integer triples
+         109 virtual machine rounds
+Using statistical security parameter 40
+Trying to run 154-bit computation
+M [[3072, 0, 0], [0, 3072, 0], [0, 0, 3072]]
+Minv [[0.000325521, 0, 0], [0, 0.000325521, 0], [0, 0, 0.000325521]]
+e [2, 2, 2]
+Compiler: ./compile.py -l -E malicious-rep-ring qp3_v5 -R 154
+	5 triples of malicious replicated Z2^154 left
+	553 bits of malicious replicated Z2^154 left
+Detailed costs:
+             3 integer dot products
+             9 integer inputs
+          6414 integer multiplications
+         13021 integer openings
+Spent 0.681782 seconds (0.264056 MB, 131 rounds) on the online phase and 4.29583 seconds (2.57831 MB, 221 rounds) on the preprocessing/offline phase.
+Communication details:
+Broadcasting 0.005129 MB in 163 rounds, taking 0.621581 seconds
+Passing around 2.83202 MB in 179 rounds, taking 2.84368 seconds
+Receiving directly 8e-05 MB in 5 rounds, taking 0.011249 seconds
+Sending directly 8e-05 MB in 5 rounds, taking 0.00108356 seconds
+CPU time = 1.80805
+The following benchmarks are including preprocessing (offline phase).
+Time = 4.98136 seconds 
+Data sent = 2.84236 MB in ~352 rounds (party 0 only)
+Global data sent = 8.52709 MB (all parties)
+Actual cost of program:
+  Type int
+          6414        Triples
+         21447           Bits
+This program might benefit from some protocol options.
+Consider adding the following at the beginning of your code:
+	program.use_edabit(True)
+Command line: ./malicious-rep-ring-party.x --direct --batch-size 1000 -v -p 0 -h 192.168.1.2 qp3_v5)

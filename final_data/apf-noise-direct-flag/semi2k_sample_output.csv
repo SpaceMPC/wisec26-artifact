@@ -1,0 +1,63 @@
+(0, Default bit length for compilation: 153
+Default security parameter for compilation: 40
+Compiling file Programs/Source/apf_with_random_aug_22_2025.mpc
+WARNING: Order of memory instructions not preserved, errors possible
+WARNING: Probabilistic truncation leaks some information, see https://eprint.iacr.org/2024/1127 for discussion. Use 'sfix.round_nearest = True' to deactivate this for fixed-point operations.
+Writing to Programs/Bytecode/apf_with_random_aug_22_2025-TruncPr(14)_93_30-1.bc
+Writing to Programs/Bytecode/apf_with_random_aug_22_2025-LTZ(1)_64-3.bc
+Writing to Programs/Bytecode/apf_with_random_aug_22_2025-FPDiv(1)_63_30-5.bc
+Writing to Programs/Bytecode/apf_with_random_aug_22_2025-TruncPr(1)_93_30-7.bc
+Compiled 100000 lines at Thu Aug 28 12:50:16 2025
+Writing to Programs/Bytecode/apf_with_random_aug_22_2025-exp2_fx(1)_63_30-8.bc
+Writing to Programs/Bytecode/apf_with_random_aug_22_2025-TruncPr(3)_93_30-10.bc
+Writing to Programs/Bytecode/apf_with_random_aug_22_2025-BitDecRing(63)(3)_63_63-11.bc
+Writing to Programs/Bytecode/apf_with_random_aug_22_2025-TruncPr(3)_63_30-13.bc
+Writing to Programs/Bytecode/apf_with_random_aug_22_2025-Pow2(3)_153-15.bc
+Writing to Programs/Bytecode/apf_with_random_aug_22_2025-TruncInRing(3)_153-17.bc
+Writing to Programs/Schedules/apf_with_random_aug_22_2025.sch
+Writing to Programs/Bytecode/apf_with_random_aug_22_2025-0.bc
+Hash: 1946534efe8865448299bc105349251bbc5ba55218d5f241ab61be8622c3a742
+Program requires at most:
+           9 integer inputs from player 0
+           6 integer inputs from player 1
+       10772 integer bits
+          91 integer opens
+          15 integer 2-way splits
+           9 integer 2-way split rounds
+        3466 bit triples
+         715 integer dabits
+        2859 integer triples
+        2859 integer simple multiplications
+         193 virtual machine rounds
+Truncation error probability 2^-40
+Trying to run 154-bit computation
+Setup took 0.388876 seconds.
+Compiler: ./compile.py -l -E semi2k apf_with_random_aug_22_2025 -R 154
+	370 triples of Z2^154 left
+Significant amount of unused triples of Z2^154 distorting the benchmark. For more accurate benchmarks, consider reducing the batch size with --batch-size.
+	63 dabits of Z2^154 left
+Detailed costs:
+          3466 ANDs
+          2859 integer multiplications
+Spent 1.48502 seconds (0.11988 MB, 179 rounds) on the online phase and 20.5198 seconds (14.3981 MB, 184 rounds) on the preprocessing/offline phase.
+Communication details:
+Broadcasting 0.11988 MB in 179 rounds, taking 1.46719 seconds
+Exchanging one-to-one 9.94582 MB in 15 rounds, taking 9.41242 seconds
+Receiving one-to-one 4.39961 MB in 77 rounds, taking 0 seconds
+Sending one-to-one 4.45223 MB in 92 rounds, taking 0.00149732 seconds
+CPU time = 10.4542
+The following benchmarks are including preprocessing (offline phase).
+Time = 22.0091 seconds 
+Data sent = 14.5179 MB in ~363 rounds (party 0 only)
+Global data sent = 28.9833 MB (all parties)
+Actual preprocessing cost of program:
+  Type int
+          2859        Triples
+         10772           Bits
+           715         daBits
+  Type bit
+          3466        Triples
+This program might benefit from some protocol options.
+Consider adding the following at the beginning of your code:
+	program.use_trunc_pr = True
+Command line: ./semi2k-party.x --batch-size 1000 --direct -v -p 0 -N 2 -h 192.168.1.2 apf_with_random_aug_22_2025)

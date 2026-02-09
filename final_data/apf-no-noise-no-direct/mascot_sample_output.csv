@@ -1,0 +1,56 @@
+(0, Default bit length for compilation: 64
+Default security parameter for compilation: 40
+Compiling file Programs/Source/apf_without_random_aug_22_2025.mpc
+WARNING: Probabilistic truncation leaks some information, see https://eprint.iacr.org/2024/1127 for discussion. Use 'sfix.round_nearest = True' to deactivate this for fixed-point operations.
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-TruncPr(14)_93_30-1.bc
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-LTZ(1)_64-3.bc
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-FPDiv(1)_63_30-5.bc
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-TruncPr(1)_93_30-7.bc
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-exp2_fx(1)_63_30-8.bc
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-TruncPr(3)_93_30-10.bc
+Writing to Programs/Schedules/apf_without_random_aug_22_2025.sch
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-0.bc
+Hash: 8a24714a11bf43290a07a330bfd73a04e0c30f3bc8bd1951eab6f34d892bd8a0
+Program requires at most:
+           9 integer inputs from player 0
+           6 integer inputs from player 1
+       13789 integer bits
+          90 integer opens
+        1132 integer triples
+        1132 integer simple multiplications
+          93 virtual machine rounds
+Using statistical security parameter 40
+No modulus found in Player-Data//2-p-192/Params-Data, generating 192-bit prime
+Setup took 0.308673 seconds.
+Compiler: ./compile.py -l -E mascot apf_without_random_aug_22_2025
+	110 triples of SPDZ gfp left
+	1 bits of SPDZ gfp left
+Detailed costs:
+             9 integer inputs
+          1132 integer multiplications
+         29934 integer openings
+Spent 0.874995 seconds (0.061748 MB, 307 rounds) on the online phase and 888.051 seconds (670.771 MB, 606 rounds) on the preprocessing/offline phase.
+Communication details:
+Broadcasting 0.00936 MB in 297 rounds, taking 23.253 seconds
+Exchanging one-to-one 554.14 MB in 102 rounds, taking 528.592 seconds
+Receiving directly 1.07938 MB in 151 rounds, taking 7.3364 seconds
+Receiving one-to-one 115.604 MB in 105 rounds, taking 40.5769 seconds
+Sending directly 1.07923 MB in 150 rounds, taking 0.0142207 seconds
+Sending one-to-one 115.604 MB in 105 rounds, taking 36.0176 seconds
+Sending to all 0.000216 MB in 1 rounds, taking 5.8803e-05 seconds
+Sending/receiving 3.2e-05 MB in 2 rounds, taking 0.00278114 seconds
+CPU time = 486.938
+The following benchmarks are including preprocessing (offline phase).
+Time = 888.933 seconds 
+Data sent = 670.833 MB in ~913 rounds (party 0 only)
+Global data sent = 1341.67 MB (all parties)
+Actual preprocessing cost of program:
+  Type int
+          1132        Triples
+         13789           Bits
+            15   Input tuples (9 6)
+This program might benefit from some protocol options.
+Consider adding the following at the beginning of your code:
+	program.use_edabit(True)
+Coordination took 0.0286259 seconds
+Command line: ./mascot-party.x --batch-size 1000 -v -p 0 -N 2 -h 192.168.1.2 apf_without_random_aug_22_2025)

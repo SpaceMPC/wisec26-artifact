@@ -1,0 +1,104 @@
+import ml
+#program.use_edabit(True)
+
+# sfix: fixed-point numbers
+
+# set the precision after the dot and in total
+
+sfix.set_precision(36, 71)
+cfix.set_precision(36, 71)
+
+#Read in Inverse P matrices from each party. Each multiplied by a factor of 2. 
+#We receive 2*( P_i^(-1) ) 
+P1_inverse = sfix.input_tensor_from(0,(3,3))
+P2_inverse = sfix.input_tensor_from(1,(3,3))
+P3_inverse = sfix.input_tensor_from(2,(3,3))
+
+#make xhat matrices -- these values are expected to be read in as above, but MP-SPDZ does not support reading to cfix 
+xhat = Array(9, cfix)
+# these need to be set to meaningful sample values
+# vector 1
+xhat[0] = 1
+xhat[1] = 1
+xhat[2] = 1
+# vector 2
+xhat[3] = 2
+xhat[4] = 2
+xhat[5] = 2
+# vector 3
+xhat[6] = 3
+xhat[7] = 3
+xhat[8] = 3
+
+# copy the 3 inverse matrices into P_inverse one after another
+P_inverse = P1_inverse.concat_columns(P2_inverse)
+P_inverse = P_inverse.concat_columns(P3_inverse)
+
+M = P1_inverse + P2_inverse + P3_inverse
+tempV = P_inverse*xhat
+arr = Array(9,regint)
+@for_range_opt(9)
+def _(i):
+    arr[i] = i
+V = tempV.get_slice_vector(arr.get_part(0,3)) + tempV.get_slice_vector(arr.get_part(3,3)) + tempV.get_slice_vector(arr.get_part(6,3))
+
+#M_inverse = ml.mr(M,4)
+
+# Matrix inversion (hard-coded)
+ei = M[2-1][2-1] * M[3-1][3-1]
+fh = M[2-1][3-1] * M[3-1][2-1]
+fg = M[2-1][3-1] * M[3-1][1-1]
+di = M[2-1][1-1] * M[3-1][3-1]
+dh = M[2-1][1-1] * M[3-1][2-1]
+eg = M[2-1][2-1] * M[3-1][1-1]
+ch = M[1-1][3-1] * M[3-1][2-1]
+bi = M[1-1][2-1] * M[3-1][3-1]
+ai = M[1-1][1-1] * M[3-1][3-1]
+cg = M[1-1][3-1] * M[3-1][1-1]
+bg = M[1-1][2-1] * M[3-1][1-1]
+ah = M[1-1][1-1] * M[3-1][2-1]
+bf = M[1-1][2-1] * M[2-1][3-1]
+ce = M[1-1][3-1] * M[2-1][2-1]
+cd = M[1-1][3-1] * M[2-1][1-1]
+af = M[1-1][1-1] * M[2-1][3-1]
+ae = M[1-1][1-1] * M[2-1][2-1]
+bd = M[1-1][2-1] * M[2-1][1-1]
+
+aei = ae * M[3-1][3-1]
+afh = af * M[3-1][2-1]
+bdi = bd * M[3-1][3-1]
+bfg = bf * M[3-1][1-1]
+cdh = cd * M[3-1][2-1]
+ceg = ce * M[3-1][1-1]
+
+det = aei - afh - bdi + bfg + cdh - ceg
+#sca = 1/det
+
+M_inverse = Matrix(3, 3, sfix)
+M_inverse[0][0] = (ei-fh)/det
+M_inverse[0][1] = (fg-di)/det
+M_inverse[0][2] = (dh-eg)/det
+M_inverse[1][0] = (ch-bi)/det
+M_inverse[1][1] = (ai-cg)/det
+M_inverse[1][2] = (bg-ah)/det
+M_inverse[2][0] = (bf-ce)/det
+M_inverse[2][1] = (cd-af)/det
+M_inverse[2][2] = (ae-bd)/det
+
+#M_inverse[0][0] = M_inverse[0][0]/det
+#M_inverse[0][1] = M_inverse[0][1]/det
+#M_inverse[0][2] = M_inverse[0][2]/det
+#M_inverse[1][0] = M_inverse[1][0]/det
+#M_inverse[1][1] = M_inverse[1][1]/det
+#M_inverse[1][2] = M_inverse[1][2]/det
+#M_inverse[2][0] = M_inverse[2][0]/det
+#M_inverse[2][1] = M_inverse[2][1]/det
+#M_inverse[2][2] = M_inverse[2][2]/det
+
+#M_inverse = sca * Mat
+
+e = M_inverse*V
+
+print_ln("M %s", M.reveal())
+print_ln("Minv %s", M_inverse.reveal())
+print_ln("e %s", e.reveal())

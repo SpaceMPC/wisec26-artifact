@@ -1,0 +1,55 @@
+(0, Default bit length for compilation: 153
+Default security parameter for compilation: 40
+Compiling file Programs/Source/qp3_v5.mpc
+WARNING: Order of memory instructions not preserved, errors possible
+WARNING: Probabilistic truncation leaks some information, see https://eprint.iacr.org/2024/1127 for discussion. Use 'sfix.round_nearest = True' to deactivate this for fixed-point operations.
+Writing to Programs/Bytecode/qp3_v5-TruncPr(1)_107_36-1.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(18)_107_36-3.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(6)_107_36-4.bc
+Writing to Programs/Bytecode/qp3_v5-FPDiv(9)_71_36-5.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(3)_107_36-7.bc
+Writing to Programs/Schedules/qp3_v5.sch
+Writing to Programs/Bytecode/qp3_v5-0.bc
+Hash: 4865551684ac063f64fd3e8dceda266b5928e14b73390c338ead6983c9a306da
+Program requires at most:
+           9 integer inputs from player 0
+           9 integer inputs from player 1
+           9 integer inputs from player 2
+         652 integer dabits
+       88058 bit triples
+         154 integer bits
+         175 integer opens
+         168 integer triples
+         408 virtual machine rounds
+Using statistical security parameter 40
+Trying to run 154-bit computation
+M [[3072, 0, 0], [0, 3072, 0], [0, 0, 3072]]
+Minv [[0.000325521, 0, 0], [0, 0.000325521, 0], [0, 0, 0.000325521]]
+e [2, 2, 2]
+Compiler: ./compile.py -l -E ps-rep-ring qp3_v5 -R 154
+	575488 triples of replicated secret left
+Significant amount of unused triples of replicated secret distorting the benchmark. This protocol has a large minimum batch size, which makes this unavoidable for small programs.
+Detailed costs:
+         88058 ANDs
+             3 integer dot products
+             9 integer inputs
+           168 integer multiplications
+           175 integer openings
+Spent 1.57152 seconds (0.343172 MB, 502 rounds) on the online phase and 1.12985 seconds (0.906588 MB, 22 rounds) on the preprocessing/offline phase.
+Communication details:
+Broadcasting 0.003371 MB in 113 rounds, taking 0.464267 seconds
+Passing around 1.24295 MB in 403 rounds, taking 1.92254 seconds
+Receiving directly 6.4e-05 MB in 4 rounds, taking 0.00901727 seconds
+Sending directly 6.4e-05 MB in 4 rounds, taking 0.00103502 seconds
+CPU time = 0.821824
+The following benchmarks are including preprocessing (offline phase).
+Time = 2.71164 seconds 
+Data sent = 1.24976 MB in ~524 rounds (party 0 only)
+Global data sent = 3.74928 MB (all parties)
+Actual cost of program:
+  Type int
+           154           Bits
+           652         daBits
+  Type bit
+         88058        Triples
+Command line: ./ps-rep-ring-party.x --direct --batch-size 1000 -v -p 0 -h 192.168.1.2 qp3_v5)

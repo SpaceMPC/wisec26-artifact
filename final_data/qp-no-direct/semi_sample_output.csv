@@ -1,0 +1,54 @@
+(0, Default bit length for compilation: 64
+Default security parameter for compilation: 40
+Compiling file Programs/Source/qp3_v5.mpc
+WARNING: Order of memory instructions not preserved, errors possible
+WARNING: Probabilistic truncation leaks some information, see https://eprint.iacr.org/2024/1127 for discussion. Use 'sfix.round_nearest = True' to deactivate this for fixed-point operations.
+Writing to Programs/Bytecode/qp3_v5-TruncPr(1)_107_36-1.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(18)_107_36-3.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(6)_107_36-4.bc
+Writing to Programs/Bytecode/qp3_v5-FPDiv(9)_71_36-5.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(3)_107_36-7.bc
+Writing to Programs/Schedules/qp3_v5.sch
+Writing to Programs/Bytecode/qp3_v5-0.bc
+Hash: 43ba919c05cd935d1ba95f55b355eb0a7b6bd6fc3fed3e7a55762cf9ab5f405a
+Program requires at most:
+           9 integer inputs from player 0
+           9 integer inputs from player 1
+           9 integer inputs from player 2
+       28173 integer bits
+         193 integer opens
+        6405 integer triples
+         108 virtual machine rounds
+Using statistical security parameter 40
+No modulus found in Player-Data//3-Dp-192/Params-Data, generating 192-bit prime
+M [[3072, 0, 0], [0, 3072, 0], [0, 0, 3072]]
+Minv [[0.000325521, 0, 0], [0, 0.000325521, 0], [0, 0, 0.000325521]]
+e [2, 2, 2]
+Compiler: ./compile.py -l -E semi qp3_v5
+	280 triples of gfp left
+	827 bits of gfp left
+Detailed costs:
+             3 integer dot products
+          6405 integer multiplications
+Spent 6.41512 seconds (0.624176 MB, 301 rounds) on the online phase and 561.958 seconds (441.686 MB, 938 rounds) on the preprocessing/offline phase.
+Communication details:
+Exchanging one-to-one 328.873 MB in 82 rounds, taking 560.725 seconds
+Receiving directly 3.40814 MB in 266 rounds, taking 22.5307 seconds
+Receiving one-to-one 110.029 MB in 312 rounds, taking 0 seconds
+Sending directly 3.40814 MB in 266 rounds, taking 0.0808039 seconds
+Sending one-to-one 110.029 MB in 312 rounds, taking 0 seconds
+Sending/receiving 3.2e-05 MB in 1 rounds, taking 0.00533883 seconds
+CPU time = 251.894
+The following benchmarks are including preprocessing (offline phase).
+Time = 568.385 seconds 
+Data sent = 442.31 MB in ~1239 rounds (party 0 only)
+Global data sent = 1323.52 MB (all parties)
+Actual cost of program:
+  Type int
+          6405        Triples
+         28173           Bits
+This program might benefit from some protocol options.
+Consider adding the following at the beginning of your code:
+	program.use_trunc_pr = True
+	program.use_edabit(True)
+Command line: ./semi-party.x --batch-size 1000 -v -p 0 -N 3 -h 192.168.1.2 qp3_v5)

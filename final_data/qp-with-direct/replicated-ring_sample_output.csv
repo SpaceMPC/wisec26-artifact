@@ -1,0 +1,52 @@
+(0, Default bit length for compilation: 153
+Default security parameter for compilation: 40
+Compiling file Programs/Source/qp3_v5.mpc
+WARNING: Order of memory instructions not preserved, errors possible
+Writing to Programs/Bytecode/qp3_v5-TruncPr(1)_107_36-1.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(18)_107_36-3.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(6)_107_36-4.bc
+Writing to Programs/Bytecode/qp3_v5-FPDiv(9)_71_36-5.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(3)_107_36-7.bc
+Writing to Programs/Schedules/qp3_v5.sch
+Writing to Programs/Bytecode/qp3_v5-0.bc
+Hash: 07123521904df3c3ffc94efe63c850e99422d5497e69af3ea87336efa59f87f3
+Program requires at most:
+           9 integer inputs from player 0
+           9 integer inputs from player 1
+           9 integer inputs from player 2
+         168 integer triples
+          36 integer dabits
+       11358 bit triples
+          21 integer opens
+         129 virtual machine rounds
+Using statistical security parameter 40
+Trying to run 154-bit computation
+M [[3072, 0, 0], [0, 3072, 0], [0, 0, 3072]]
+Minv [[0.000325521, 0, 0], [0, 0.000325521, 0], [0, 0, 0.000325521]]
+e [-1.57412e+21, -1.57412e+21, -1.57412e+21]
+Compiler: ./compile.py -l -E replicated-ring qp3_v5 -R 154
+	28 dabits of replicated Z2^154 left
+Detailed costs:
+            41 AND rounds
+         11358 ANDs
+             3 integer dot products
+            73 integer inputs
+            19 integer multiplication rounds
+           159 integer multiplications
+            21 integer openings
+            38 probabilistic truncation rounds
+            99 probabilistic truncations
+Spent 0.275057 seconds (0.008944 MB, 73 rounds) on the online phase and 0.0116327 seconds (0.00128 MB, 2 rounds) on the preprocessing/offline phase.
+Communication details:
+Passing around 0.008944 MB in 66 rounds, taking 0.18174 seconds
+Receiving directly 0.00524 MB in 8 rounds, taking 0.0761252 seconds
+Sending directly 0.00128 MB in 1 rounds, taking 0.000972362 seconds
+CPU time = 0.120067
+The following benchmarks are including preprocessing (offline phase).
+Time = 0.296608 seconds 
+Data sent = 0.010224 MB in ~75 rounds (party 0 only)
+Global data sent = 0.041672 MB (all parties)
+Actual cost of program:
+  Type int
+            36         daBits
+Command line: ./replicated-ring-party.x --direct --batch-size 1000 -v -p 0 -h 192.168.1.2 qp3_v5)

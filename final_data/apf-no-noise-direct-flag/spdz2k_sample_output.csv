@@ -1,0 +1,62 @@
+(0, Default bit length for compilation: 153
+Default security parameter for compilation: 40
+Compiling file Programs/Source/apf_without_random_aug_22_2025.mpc
+WARNING: Probabilistic truncation leaks some information, see https://eprint.iacr.org/2024/1127 for discussion. Use 'sfix.round_nearest = True' to deactivate this for fixed-point operations.
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-TruncPr(14)_93_30-1.bc
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-LTZ(1)_64-3.bc
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-FPDiv(1)_63_30-5.bc
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-TruncPr(1)_93_30-7.bc
+Compiled 100000 lines at Thu Aug 28 08:33:34 2025
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-exp2_fx(1)_63_30-8.bc
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-TruncPr(3)_93_30-10.bc
+Writing to Programs/Schedules/apf_without_random_aug_22_2025.sch
+Writing to Programs/Bytecode/apf_without_random_aug_22_2025-0.bc
+Hash: c803e057872fc8bb5e7e8d590c74abbb812363218a1240f16d0cb66a46ca5d4b
+Program requires at most:
+           9 integer inputs from player 0
+           6 integer inputs from player 1
+       10274 integer bits
+          90 integer opens
+        1038 integer triples
+        1038 integer simple multiplications
+         102 virtual machine rounds
+Using SPDZ2k security parameter 64
+Using statistical security parameter 40
+Trying to run 154-bit computation
+Setup took 0.383875 seconds.
+Compiler: ./compile.py -l -E spdz2k apf_without_random_aug_22_2025 -R 154
+Tinier open counter: 0
+	111 triples of SPDZ2^(154+64) left
+Significant amount of unused triples of SPDZ2^(154+64) distorting the benchmark. For more accurate benchmarks, consider reducing the batch size with --batch-size.
+	4 bits of SPDZ2^(154+64) left
+SPDZ gf2n_long open counter: 0
+SPDZ2^(154+64) open counter: 92
+Detailed costs:
+             9 integer inputs
+          1038 integer multiplications
+Spent 0.49909 seconds (0.066036 MB, 271 rounds) on the online phase and 653.061 seconds (441.195 MB, 868 rounds) on the preprocessing/offline phase.
+Communication details:
+Broadcasting 0.072972 MB in 517 rounds, taking 22.2545 seconds
+Exchanging one-to-one 315.105 MB in 224 rounds, taking 321.693 seconds
+Receiving directly 1.3987 MB in 87 rounds, taking 2.11084 seconds
+Receiving one-to-one 124.684 MB in 108 rounds, taking 81.8457 seconds
+Sending directly 1.39854 MB in 86 rounds, taking 0.00555172 seconds
+Sending one-to-one 124.684 MB in 108 rounds, taking 48.9641 seconds
+Sending to all 0.000252 MB in 1 rounds, taking 6.1133e-05 seconds
+Sending/receiving 0.000128 MB in 8 rounds, taking 0.0109279 seconds
+CPU time = 300.146
+The following benchmarks are including preprocessing (offline phase).
+Time = 653.569 seconds 
+Data sent = 441.261 MB in ~1139 rounds (party 0 only)
+Global data sent = 882.522 MB (all parties)
+Actual preprocessing cost of program:
+  Type int
+          1038        Triples
+         10274           Bits
+            90          Opens
+            15   Input tuples (9 6)
+This program might benefit from some protocol options.
+Consider adding the following at the beginning of your code:
+	program.use_edabit(True)
+Coordination took 0.119656 seconds
+Command line: ./spdz2k-party.x --batch-size 1000 --direct -v -p 0 -N 2 -h 192.168.1.2 apf_without_random_aug_22_2025)

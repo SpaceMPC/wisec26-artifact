@@ -1,0 +1,61 @@
+(0, Default bit length for compilation: 153
+Default security parameter for compilation: 40
+Compiling file Programs/Source/qp3_v5.mpc
+WARNING: Order of memory instructions not preserved, errors possible
+WARNING: Probabilistic truncation leaks some information, see https://eprint.iacr.org/2024/1127 for discussion. Use 'sfix.round_nearest = True' to deactivate this for fixed-point operations.
+Writing to Programs/Bytecode/qp3_v5-TruncPr(1)_107_36-1.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(18)_107_36-3.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(6)_107_36-4.bc
+Writing to Programs/Bytecode/qp3_v5-FPDiv(9)_71_36-5.bc
+Writing to Programs/Bytecode/qp3_v5-TruncPr(3)_107_36-7.bc
+Writing to Programs/Schedules/qp3_v5.sch
+Writing to Programs/Bytecode/qp3_v5-0.bc
+Hash: 095f2276d6bdd6d34083ace95c78ad96fb2b986e9d37685e11f1978ee3f0d6d7
+Program requires at most:
+           9 integer inputs from player 0
+           9 integer inputs from player 1
+           9 integer inputs from player 2
+       21447 integer bits
+         193 integer opens
+        6414 integer triples
+         109 virtual machine rounds
+Using SPDZ2k security parameter 64
+Using statistical security parameter 40
+Trying to run 154-bit computation
+M [[3072, 0, 0], [0, 3072, 0], [0, 0, 3072]]
+Minv [[0.000325521, 0, 0], [0, 0.000325521, 0], [0, 0, 0.000325521]]
+e [2, 2, 2]
+Compiler: ./compile.py -l -E spdz2k qp3_v5 -R 154
+	5 triples of SPDZ2^(154+64) left
+	553 bits of SPDZ2^(154+64) left
+Detailed costs:
+             3 integer dot products
+             9 integer inputs
+          6414 integer multiplications
+         13021 integer openings
+Spent 1.52682 seconds (0.74204 MB, 520 rounds) on the online phase and 2766.83 seconds (2046.66 MB, 2024 rounds) on the preprocessing/offline phase.
+Communication details:
+Broadcasting 0.01686 MB in 583 rounds, taking 71.9122 seconds
+Exchanging one-to-one 1562.19 MB in 588 rounds, taking 2839.24 seconds
+Receiving directly 7.28702 MB in 394 rounds, taking 23.0726 seconds
+Receiving one-to-one 477.895 MB in 284 rounds, taking 420.222 seconds
+Sending directly 7.28652 MB in 392 rounds, taking 0.130911 seconds
+Sending one-to-one 477.895 MB in 284 rounds, taking 277.367 seconds
+Sending to all 0.000252 MB in 1 rounds, taking 8.0682e-05 seconds
+Sending/receiving 0.000576 MB in 18 rounds, taking 0.0552602 seconds
+CPU time = 2190.43
+The following benchmarks are including preprocessing (offline phase).
+Time = 2768.37 seconds 
+Data sent = 2047.41 MB in ~2544 rounds (party 0 only)
+Global data sent = 6134.93 MB (all parties)
+Actual cost of program:
+  Type int
+          6414        Triples
+         21447           Bits
+           193          Opens
+            27   Input tuples (9 9 9)
+This program might benefit from some protocol options.
+Consider adding the following at the beginning of your code:
+	program.use_edabit(True)
+Coordination took 0.21728 seconds
+Command line: ./spdz2k-party.x --batch-size 1000 -v -p 0 -N 3 -h 192.168.1.2 qp3_v5)
