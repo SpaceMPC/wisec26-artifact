@@ -22,7 +22,7 @@ C6) SDR: N/A
 C7) Profiling Boards: 3 Jetson Nano Developer Kits
 
 D) Experimentation Info
-D1) VM Credentials [Usernames, Passwords)
+D1) VM Credentials [Usernames: main, Passwords: main)
 D2) Scripts to recreate graphs; output is written in fig_X/ directories
     bash create_figs.sh
 D3) Scripts and how-tos to prepare the software for system
